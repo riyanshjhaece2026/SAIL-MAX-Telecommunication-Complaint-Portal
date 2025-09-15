@@ -32,7 +32,7 @@ export function loadCheckStatus() {
         <p><strong>Issue Type:</strong> ${c.issueType}</p>
         <p><strong>Location:</strong> ${c.location}</p>
         <p><strong>Contact Number:</strong> ${c.contactNumber}</p>
-        <p><strong>Status:</strong> ${c.status}</p>
+        <p><strong>Status:</strong> ${c.status || "In Progress"}</p>
         <p><strong>Progress:</strong> ${c.progressText || ""}</p>
         <p><strong>Last Updated:</strong> ${formatTimestamp(c.updatedAt)}</p>
       `;

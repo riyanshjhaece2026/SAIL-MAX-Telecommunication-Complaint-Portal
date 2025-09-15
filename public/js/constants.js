@@ -119,5 +119,4 @@ export const departments = [
 ];
 export const issueTypes = [
   "Line Noise Issue","Equipment Faulty","Dead Phone","Operation Problem",
-  "Maintenance Required","Performance Issue","Security Concern","Other"
 ];

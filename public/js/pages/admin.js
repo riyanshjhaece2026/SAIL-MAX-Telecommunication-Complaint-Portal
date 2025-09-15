@@ -84,7 +84,7 @@ export async function loadAdminPanel() {
         </td>
         <td data-label="Status">
           <select class="statusSelect">
-            <option value="Registered" ${c.status === "Registered" ? "selected" : ""}>Registered</option>
+          
             <option value="In Progress" ${c.status === "In Progress" ? "selected" : ""}>In Progress</option>
             <option value="Resolved" ${c.status === "Resolved" ? "selected" : ""}>Resolved</option>
             <option value="Closed" ${c.status === "Closed" ? "selected" : ""}>Closed</option>
@@ -95,7 +95,7 @@ export async function loadAdminPanel() {
         <td data-label="Actions">
           <div class="action-buttons">
             <button class="update-btn">Update</button>
-            <button class="delete-btn">Delete</button>
+
           </div>
         </td>
       </tr>

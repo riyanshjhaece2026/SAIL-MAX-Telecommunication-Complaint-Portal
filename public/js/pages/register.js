@@ -82,7 +82,13 @@ export function loadRegisterComplaint() {
     const complaintId = generateComplaintID(maxNumber, department);
     try {
       await api.createComplaint({
-        id: complaintId, maxNumber, department, issueType, location, contactNumber
+        id: complaintId,
+        maxNumber,
+        department,
+        issueType,
+        location,
+        contactNumber,
+        status: "In Progress" // Set default status
       });
 
       form.reset();
