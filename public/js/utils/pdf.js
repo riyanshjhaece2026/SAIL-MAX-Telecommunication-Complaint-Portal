@@ -12,7 +12,7 @@ export function downloadComplaintsPdf(list) {
   }
   const doc = new jsPDF({ orientation: 'landscape' });
   doc.setFontSize(14);
-  doc.text("SAIL Complaint Management System - Complaints Report", 14, 16);
+  doc.text("SAIL Max Complaint Portal - Complaints Report", 14, 16);
 
   // Updated headers and row order
   const headers = [
@@ -65,7 +65,7 @@ export function downloadComplaintsPdf(list) {
   // Generate unique filename with date and time
   const now = new Date();
   const pad = n => n.toString().padStart(2, '0');
-  const filename = `complaints_report_${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}.pdf`;
+  const filename = `Complaints_Report_${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}_${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}.pdf`;
 
   doc.save(filename);
 }

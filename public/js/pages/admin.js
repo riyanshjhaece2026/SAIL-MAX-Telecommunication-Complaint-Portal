@@ -95,7 +95,6 @@ export async function loadAdminPanel() {
         <td data-label="Actions">
           <div class="action-buttons">
             <button class="update-btn">Update</button>
-
           </div>
         </td>
       </tr>
