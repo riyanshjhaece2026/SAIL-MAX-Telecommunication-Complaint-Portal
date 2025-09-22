@@ -1,6 +1,6 @@
 /* Base */
 body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-header { background: #f8f6f6; color: rgb(4, 26, 114); display: flex; align-items: center; padding: 20px 20px; position: sticky; top: 0; z-index: 1000; }
+header { background: #ffffff; color: rgb(4, 26, 114); display: flex; align-items: center; padding: 20px 20px; position: sticky; top: 0; z-index: 1000; }
 header img { height: 90px; margin-right: 15px; }
 .header-text { flex-grow: 1; text-align: center; }
 .header-text h1 { margin: 0; font-size: 34px; }
