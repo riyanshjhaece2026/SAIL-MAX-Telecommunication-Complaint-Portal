@@ -113,7 +113,7 @@ app.get('/api/complaints', authAdmin, async (req, res) => {
 // Update (admin) — status + progressText
 app.patch('/api/complaints/:id', authAdmin, async (req, res) => {
   try {
-    const allowedStatuses = ['Registered', 'In Progress', 'Resolved', 'Closed'];
+    const allowedStatuses = [ 'In Progress', 'Resolved', 'Closed'];
     const updates = {};
 
     if (typeof req.body.status === 'string') {
