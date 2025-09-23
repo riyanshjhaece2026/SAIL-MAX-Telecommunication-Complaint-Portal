@@ -81,7 +81,7 @@ app.post('/api/complaints', async (req, res) => {
 
     if (!/^[78]\d{4}$/.test(maxNumber)) return res.status(400).json({ message: 'Invalid max number' });
     if (!department || !issueType || !location) return res.status(400).json({ message: 'Missing fields' });
-    if (!/^\d{10}$/.test(contactNumber)) return res.status(400).json({ message: 'Invalid contact number' });
+    if (!/^[6789]\d{9}$/.test(contactNumber)) return res.status(400).json({ message: 'Invalid contact number' });
     if (!id) return res.status(400).json({ message: 'Missing complaint ID' });
 
     const complaint = await Complaint.create({
@@ -161,6 +161,19 @@ app.post('/api/admin/login', async (req, res) => {
   if (!ok) return res.status(401).json({ message: 'Invalid username or password' });
   const token = jwt.sign({ sub: admin._id.toString(), username }, JWT_SECRET, { expiresIn: '7d' });
   res.json({ token });
+});
+
+// Public: Check if complaint exists by maxNumber or contactNumber
+app.get('/api/complaints/check', async (req, res) => {
+  const { maxNumber, contactNumber } = req.query;
+  if (!maxNumber && !contactNumber) {
+    return res.status(400).json({ message: 'Missing maxNumber or contactNumber' });
+  }
+  const query = [];
+  if (maxNumber) query.push({ maxNumber });
+  if (contactNumber) query.push({ contactNumber });
+  const found = await Complaint.findOne({ $or: query }).lean();
+  res.json({ exists: !!found });
 });
 
 // Serve frontend (same-origin)

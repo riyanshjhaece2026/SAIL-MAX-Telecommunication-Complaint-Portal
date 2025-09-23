@@ -94,6 +94,7 @@ export function loadRegisterComplaint() {
       form.reset();
       showComplaintRegistered(complaintId);
       get("maxNumber").focus();
+    
     } catch (err) {
       console.error(err);
       const msg = get("formMessage");

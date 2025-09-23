@@ -12,7 +12,7 @@ export function downloadComplaintsPdf(list) {
   }
   const doc = new jsPDF({ orientation: 'landscape' });
   doc.setFontSize(14);
-  doc.text("SAIL Max Complaint Portal - Complaints Report", 14, 16);
+  doc.text("Report Generated on " + new Date().toLocaleString(), 14, 16);
 
   // Updated headers and row order
   const headers = [
