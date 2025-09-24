@@ -44,19 +44,50 @@ export function loadCheckStatus() {
       }
 
       statusResult.style.color = "black";
-      statusResult.innerHTML = complaints.map(c => `
-        <div style="margin-bottom:20px;">
-          <p><strong>Complaint ID:</strong> ${c.id}</p>
-          <p><strong># Max Number:</strong> ${c.maxNumber}</p>
-          <p><strong>&#127970; Department:</strong> ${c.department}</p>
-          <p><strong>&#128220; Issue Type:</strong> ${c.issueType}</p>
-          <p><strong>&#128205; Location:</strong> ${c.location}</p>
-          <p><strong>&#128222; Contact Number:</strong> ${c.contactNumber}</p>
-          <p><strong>Status:</strong> ${!c.status || !c.status.trim() ? "In Progress" : c.status}</p>
-          <p><strong>Progress:</strong> ${c.progressText || ""}</p>
-          <p><strong>Last Updated:</strong> ${formatTimestamp(c.updatedAt)}</p>
-        </div>
-      `).join('');
+      statusResult.innerHTML = `
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+          }
+          th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+          }
+        </style>
+        <table>
+          <thead>
+            <tr>
+              <th>Complaint ID</th>
+              <th>Max Number</th>
+              <th>Department</th>
+              <th>Issue Type</th>
+              <th>Location</th>
+              <th>Contact Number</th>
+              <th>Status</th>
+              <th>Progress</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${complaints.map(c => `
+              <tr>
+                <td>${c.id}</td>
+                <td>${c.maxNumber}</td>
+                <td>${c.department}</td>
+                <td>${c.issueType}</td>
+                <td>${c.location}</td>
+                <td>${c.contactNumber}</td>
+                <td>${!c.status || !c.status.trim() ? "In Progress" : c.status}</td>
+                <td>${c.progressText || ""}</td>
+                <td>${formatTimestamp(c.updatedAt)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
     } catch (err) {
       statusResult.style.color = "red";
       statusResult.textContent = "Complaint not found. Please check your details.";
