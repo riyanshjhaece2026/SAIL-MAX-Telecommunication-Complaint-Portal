@@ -9,11 +9,11 @@ export function loadCheckStatus() {
     <form id="statusForm">
       <label for="complaintId">Complaint ID:</label>
       <input type="text" id="complaintId" name="complaintId" placeholder="Enter Complaint ID" />
-      <label for="maxNumber">Max Number:</label>
+      <label for="maxNumber"># Max Number:</label>
       <input type="text" id="maxNumber" name="maxNumber" placeholder="Enter Max Number" />
       <label for="contactNumber">Mobile Number:</label>
       <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter Mobile Number" />
-      <button type="submit" class="submit-btn">Check Status</button>
+      <button type="submit" class="submit-btn">&#128269; Check Status</button>
       <p style="font-size:12px;color:#888;margin-top:4px;">(Enter any one field to check status)</p>
     </form>
     <div id="statusResult" style="margin-top:20px;"></div>
@@ -60,11 +60,11 @@ export function loadCheckStatus() {
       statusResult.innerHTML = complaints.map(c => `
         <div style="margin-bottom:20px;">
           <p><strong>Complaint ID:</strong> ${c.id}</p>
-          <p><strong>Max Number:</strong> ${c.maxNumber}</p>
-          <p><strong>Department:</strong> ${c.department}</p>
-          <p><strong>Issue Type:</strong> ${c.issueType}</p>
-          <p><strong>Location:</strong> ${c.location}</p>
-          <p><strong>Contact Number:</strong> ${c.contactNumber}</p>
+          <p><strong># Max Number:</strong> ${c.maxNumber}</p>
+          <p><strong>&#127970; Department:</strong> ${c.department}</p>
+          <p><strong>&#128220; Issue Type:</strong> ${c.issueType}</p>
+          <p><strong>&#128205; Location:</strong> ${c.location}</p>
+          <p><strong>&#128222; Contact Number:</strong> ${c.contactNumber}</p>
           <p><strong>Status:</strong> ${!c.status || !c.status.trim() ? "In Progress" : c.status}</p>
           <p><strong>Progress:</strong> ${c.progressText || ""}</p>
           <p><strong>Last Updated:</strong> ${formatTimestamp(c.updatedAt)}</p>

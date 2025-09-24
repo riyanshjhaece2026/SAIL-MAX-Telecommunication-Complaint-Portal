@@ -118,5 +118,5 @@ export const departments = [
   "WORKS ADMN"
 ];
 export const issueTypes = [
-  "Line Noise Issue","Equipment Faulty","Dead Phone","Operation Problem",
+  "Line Noise Issue","Equipment Faulty","Dead Phone",
 ];

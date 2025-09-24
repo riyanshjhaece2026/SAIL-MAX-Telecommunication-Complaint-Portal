@@ -57,10 +57,10 @@ export async function loadAdminPanel() {
       <tr>
         <th>Complaint ID</th>
         <th>Max Number</th>
-        <th>Department</th>
-        <th>Issue Type</th>
-        <th>Contact No.</th>
-        <th>Location</th>
+        <th>&#127970; Department</th>
+        <th>&#128220; Issue Type</th>
+        <th>&#128222; Contact No.</th>
+        <th>&#128205; Location</th>
         <th>Progress Details</th>
         <th>Status</th>
         <th>Registered On</th>
@@ -75,10 +75,10 @@ export async function loadAdminPanel() {
       <tr data-id="${c.id}">
         <td data-label="Complaint ID">${c.id}</td>
         <td data-label="Max Number">${c.maxNumber}</td>
-        <td data-label="Department">${c.department}</td>
-        <td data-label="Issue Type">${c.issueType}</td>
-        <td data-label="Contact No.">${c.contactNumber || ''}</td>
-        <td data-label="Location">${c.location || ''}</td>
+        <td data-label="&#127970; Department">${c.department}</td>
+        <td data-label="&#128220; Issue Type">${c.issueType}</td>
+        <td data-label="&#128222; Contact No.">${c.contactNumber || ''}</td>
+        <td data-label="&#128205; Location">${c.location || ''}</td>
         <td data-label="Progress Details">
           <textarea rows="3" class="progressText" placeholder="Write progress details...">${c.progressText || ""}</textarea>
         </td>
@@ -106,6 +106,14 @@ export async function loadAdminPanel() {
       <div class="searchbar">
         <input id="searchMaxNumber" class="search-input" type="text" placeholder="Search by Max Number (e.g., 71234)" inputmode="numeric" />
         <button id="searchClearBtn" type="button" class="btn-secondary">Clear</button>
+      </div>
+      <div class="filter-group">
+        <label for="statusFilter">Status:</label>
+        <select id="statusFilter" class="filter-select">
+          <option value="">All</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Closed">Closed</option>
+        </select>
       </div>
       <div class="actions-right">
         <button id="downloadPdfBtn" class="btn-secondary">Download Data</button>
@@ -153,6 +161,14 @@ export async function loadAdminPanel() {
 
           const lastUpdatedCell = row.querySelector('td[data-label="Last Updated"]');
           if (lastUpdatedCell) lastUpdatedCell.textContent = formatTimestamp(updated.updatedAt);
+          
+          // After updating a row, re-apply the filters
+          const complaintIndex = allComplaints.findIndex(c => c.id === id);
+          if(complaintIndex > -1) {
+            allComplaints[complaintIndex] = {...allComplaints[complaintIndex], ...updated};
+          }
+          applyFilter();
+
 
           showToast(`
             <div class="body"><strong>Updated:</strong> ${updated.id}<br/>Status: <code>${updated.status}</code></div>
@@ -212,19 +228,30 @@ export async function loadAdminPanel() {
 
   const searchInput = document.getElementById('searchMaxNumber');
   const clearBtn = document.getElementById('searchClearBtn');
+  const statusFilter = document.getElementById('statusFilter');
 
   const applyFilter = () => {
     const q = (searchInput.value || '').trim();
-    if (!q) {
-      visibleComplaints = allComplaints;
-    } else {
+    const status = statusFilter.value;
+    
+    let filtered = allComplaints;
+
+    if (q) {
       const qDigits = q.replace(/\D/g, '');
-      visibleComplaints = allComplaints.filter(c => String(c.maxNumber).includes(qDigits));
+      filtered = filtered.filter(c => String(c.maxNumber).includes(qDigits));
     }
+
+    if (status) {
+      filtered = filtered.filter(c => c.status === status);
+    }
+
+    visibleComplaints = filtered;
     renderRows(visibleComplaints);
   };
 
   searchInput.addEventListener('input', applyFilter);
+  statusFilter.addEventListener('change', applyFilter);
+
   clearBtn.addEventListener('click', () => {
     searchInput.value = '';
     applyFilter();

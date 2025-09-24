@@ -8,33 +8,33 @@ export function loadRegisterComplaint() {
   content.innerHTML = `
     <h2>Register Complaint</h2>
     <form id="complaintForm" novalidate>
-      <label for="maxNumber">Max Number (Starts with 7 or 8, exactly 5 digits):</label>
+      <label for="maxNumber"># Max Number (Starts with 7 or 8, exactly 5 digits):</label>
       <input type="text" id="maxNumber" name="maxNumber" maxlength="5" required />
       <div id="maxNumberError" class="error"></div>
 
-      <label for="department">Select Department:</label>
+      <label for="department">&#127970; Select Department:</label>
       <select id="department" name="department" required>
         <option value="" disabled selected>Select department</option>
         ${departments.map(dep => `<option value="${dep}">${dep}</option>`).join('')}
       </select>
       <div id="departmentError" class="error"></div>
 
-      <label for="location">Enter Location:</label>
+      <label for="location">&#128205; Enter Location:</label>
       <input type="text" id="location" name="location" required />
       <div id="locationError" class="error"></div>
 
-      <label for="issueType">Select Issue Type:</label>
+      <label for="issueType">&#128220; Select Issue Type:</label>
       <select id="issueType" name="issueType" required>
         <option value="" disabled selected>Select issue type</option>
         ${issueTypes.map(type => `<option value="${type}">${type}</option>`).join('')}
       </select>
       <div id="issueTypeError" class="error"></div>
 
-      <label for="contactNumber">Contact Number (10 digits):</label>
+      <label for="contactNumber">&#128222; Contact Number (10 digits):</label>
       <input type="tel" id="contactNumber" name="contactNumber" maxlength="10" required pattern="\\d{10}" />
       <div id="contactNumberError" class="error"></div>
 
-      <button type="submit" class="submit-btn">Submit Complaint</button>
+      <button type="submit" class="submit-btn">&#9992; Submit Complaint</button>
     </form>
     <div id="formMessage" style="margin-top:15px;"></div>
   `;
