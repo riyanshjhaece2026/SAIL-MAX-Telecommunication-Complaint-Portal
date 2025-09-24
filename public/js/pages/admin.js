@@ -107,15 +107,15 @@ export async function loadAdminPanel() {
         <input id="searchMaxNumber" class="search-input" type="text" placeholder="Search by Max Number (e.g., 71234)" inputmode="numeric" />
         <button id="searchClearBtn" type="button" class="btn-secondary">Clear</button>
       </div>
-      <div class="filter-group">
-        <label for="statusFilter">Status:</label>
-        <select id="statusFilter" class="filter-select">
-          <option value="">All</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Closed">Closed</option>
-        </select>
-      </div>
       <div class="actions-right">
+        <div class="filter-group">
+          <label for="statusFilter">Status:</label>
+          <select id="statusFilter" class="filter-select">
+            <option value="">All</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
         <button id="downloadPdfBtn" class="btn-secondary">Download Data</button>
       </div>
     </div>
@@ -175,7 +175,6 @@ export async function loadAdminPanel() {
           const lastUpdatedCell = row.querySelector('td[data-label="Last Updated"]');
           if (lastUpdatedCell) lastUpdatedCell.textContent = formatTimestamp(updated.updatedAt);
           
-          // After updating a row, re-apply the filters
           const complaintIndex = allComplaints.findIndex(c => c.id === id);
           if(complaintIndex > -1) {
             allComplaints[complaintIndex] = {...allComplaints[complaintIndex], ...updated};
@@ -267,6 +266,7 @@ export async function loadAdminPanel() {
 
   clearBtn.addEventListener('click', () => {
     searchInput.value = '';
+    statusFilter.value = '';
     applyFilter();
     searchInput.focus();
   });

@@ -4,7 +4,7 @@ export function addGoBackButton() {
   if (content.querySelector('#goBackBtn')) return;
 
   const goBackBtn = document.createElement("button");
-  goBackBtn.textContent = "Go Back";
+  goBackBtn.innerHTML = "&larr; Go Back";
   goBackBtn.className = "go-back-btn";
   goBackBtn.id = "goBackBtn";
   goBackBtn.onclick = async () => {
