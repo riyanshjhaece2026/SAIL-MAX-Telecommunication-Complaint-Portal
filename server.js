@@ -84,6 +84,11 @@ app.post('/api/complaints', async (req, res) => {
     if (!/^[6789]\d{9}$/.test(contactNumber)) return res.status(400).json({ message: 'Invalid contact number' });
     if (!id) return res.status(400).json({ message: 'Missing complaint ID' });
 
+    const existingComplaint = await Complaint.findOne({ maxNumber, contactNumber });
+    if (existingComplaint) {
+      return res.status(409).json({ message: 'Complaint with this max number and contact number already exists' });
+    }
+
     const complaint = await Complaint.create({
       id, maxNumber, department, issueType, location, contactNumber
     });

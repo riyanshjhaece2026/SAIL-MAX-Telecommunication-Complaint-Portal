@@ -1,18 +1,30 @@
 import { loadHomePage } from './pages/home.js';
+import { loadRegisterComplaint } from './pages/register.js';
+import { loadCheckStatus } from './pages/status.js';
+import { loadContactPage } from './pages/contact.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   loadHomePage();
+  document.getElementById('nav-home').classList.add('active');
 });
 
-// Add this code to handle the Home button in the header
-document.addEventListener('click', (e) => {
-  const homeBtn = e.target.closest('#nav-home');
-  if (homeBtn) {
+const navLinks = {
+  'nav-home': loadHomePage,
+  'nav-register': loadRegisterComplaint,
+  'nav-status': loadCheckStatus,
+  'nav-contact': loadContactPage
+};
+
+document.querySelector('.header-nav').addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
     e.preventDefault();
-    loadHomePage();
-    // Optionally, set the active class
-    document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active'));
-    homeBtn.classList.add('active');
+    const id = e.target.id;
+
+    if (navLinks[id]) {
+      document.querySelectorAll('.header-nav a').forEach(a => a.classList.remove('active'));
+      e.target.classList.add('active');
+      navLinks[id]();
+    }
   }
 });
 

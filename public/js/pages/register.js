@@ -99,7 +99,9 @@ export function loadRegisterComplaint() {
       console.error(err);
       const msg = get("formMessage");
       msg.style.color = "red";
-      if (String(err.message).toLowerCase().includes('exists')) {
+      if (String(err.message).toLowerCase().includes('complaint with this max number and contact number already exists')) {
+        msg.textContent = "A complaint with this max number and contact number already exists.";
+      } else if (String(err.message).toLowerCase().includes('exists')) {
         msg.textContent = "A complaint with this ID already exists. Please submit again in a minute or change department.";
       } else {
         msg.textContent = "Error registering complaint. Please try again.";
