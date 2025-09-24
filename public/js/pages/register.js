@@ -52,7 +52,20 @@ export function loadRegisterComplaint() {
   };
   form.addEventListener('input', clearErrors);
 
-  get("maxNumber").addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0,5); });
+  get("maxNumber").addEventListener('input', async (e) => {
+    e.target.value = e.target.value.replace(/\D/g, '').slice(0,5);
+    const maxNumber = e.target.value;
+    if (maxNumber.length === 5) {
+      try {
+        const { exists } = await api.checkActiveComplaint(maxNumber);
+        if (exists) {
+          get("maxNumberError").textContent = "Warning: An active complaint with this max number already exists.";
+        }
+      } catch (err) {
+        console.error("Error checking active complaint:", err);
+      }
+    }
+  });
   get("contactNumber").addEventListener('input', (e) => { e.target.value = e.target.value.replace(/\D/g, '').slice(0,10); });
 
   form.onsubmit = async (e) => {
@@ -99,9 +112,10 @@ export function loadRegisterComplaint() {
       console.error(err);
       const msg = get("formMessage");
       msg.style.color = "red";
-      if (String(err.message).toLowerCase().includes('complaint with this max number and contact number already exists')) {
-        msg.textContent = "A complaint with this max number and contact number already exists.";
-      } else if (String(err.message).toLowerCase().includes('exists')) {
+      const lowerCaseError = String(err.message).toLowerCase();
+      if (lowerCaseError.includes('active complaint')) {
+        msg.textContent = "An active complaint with this max number already exists. A new complaint can only be registered if the previous one is 'Closed'.";
+      } else if (lowerCaseError.includes('exists')) {
         msg.textContent = "A complaint with this ID already exists. Please submit again in a minute or change department.";
       } else {
         msg.textContent = "Error registering complaint. Please try again.";

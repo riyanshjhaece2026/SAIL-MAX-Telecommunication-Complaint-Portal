@@ -84,9 +84,7 @@ export async function loadAdminPanel() {
         </td>
         <td data-label="Status">
           <select class="statusSelect">
-          
             <option value="In Progress" ${c.status === "In Progress" ? "selected" : ""}>In Progress</option>
-            <option value="Resolved" ${c.status === "Resolved" ? "selected" : ""}>Resolved</option>
             <option value="Closed" ${c.status === "Closed" ? "selected" : ""}>Closed</option>
           </select>
         </td>

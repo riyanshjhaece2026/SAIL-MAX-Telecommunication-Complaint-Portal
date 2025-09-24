@@ -84,9 +84,9 @@ app.post('/api/complaints', async (req, res) => {
     if (!/^[6789]\d{9}$/.test(contactNumber)) return res.status(400).json({ message: 'Invalid contact number' });
     if (!id) return res.status(400).json({ message: 'Missing complaint ID' });
 
-    const existingComplaint = await Complaint.findOne({ maxNumber, contactNumber });
+    const existingComplaint = await Complaint.findOne({ maxNumber: maxNumber, status: { $ne: 'Closed' } });
     if (existingComplaint) {
-      return res.status(409).json({ message: 'Complaint with this max number and contact number already exists' });
+      return res.status(409).json({ message: 'An active complaint with this max number already exists' });
     }
 
     const complaint = await Complaint.create({
@@ -118,7 +118,7 @@ app.get('/api/complaints', authAdmin, async (req, res) => {
 // Update (admin) — status + progressText
 app.patch('/api/complaints/:id', authAdmin, async (req, res) => {
   try {
-    const allowedStatuses = [ 'In Progress', 'Resolved', 'Closed'];
+    const allowedStatuses = [ 'In Progress', 'Closed'];
     const updates = {};
 
     if (typeof req.body.status === 'string') {
@@ -141,7 +141,7 @@ app.patch('/api/complaints/:id', authAdmin, async (req, res) => {
       { new: true }
     ).lean();
 
-    if (!c) return res.status(404).json({ message: 'Not found' });
+    if (!c) return res.status(4_04).json({ message: 'Not found' });
     res.json(c);
   } catch (err) {
     console.error('Update error:', err);
@@ -168,18 +168,16 @@ app.post('/api/admin/login', async (req, res) => {
   res.json({ token });
 });
 
-// Public: Check if complaint exists by maxNumber or contactNumber
-app.get('/api/complaints/check', async (req, res) => {
-  const { maxNumber, contactNumber } = req.query;
-  if (!maxNumber && !contactNumber) {
-    return res.status(400).json({ message: 'Missing maxNumber or contactNumber' });
+// Public: Check if complaint exists by maxNumber (and is not closed)
+app.get('/api/complaints/check_active', async (req, res) => {
+  const { maxNumber } = req.query;
+  if (!maxNumber) {
+    return res.status(400).json({ message: 'Missing maxNumber' });
   }
-  const query = [];
-  if (maxNumber) query.push({ maxNumber });
-  if (contactNumber) query.push({ contactNumber });
-  const found = await Complaint.findOne({ $or: query }).lean();
+  const found = await Complaint.findOne({ maxNumber: maxNumber, status: { $ne: 'Closed' } }).lean();
   res.json({ exists: !!found });
 });
+
 
 // Serve frontend (same-origin)
 app.use(express.static(path.join(__dirname, 'public')));

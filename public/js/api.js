@@ -32,8 +32,9 @@ export const api = {
   generateAdmin: () => fetchJSON('/admin/generate', { method: 'POST' }),
   createComplaint: (payload) => fetchJSON('/complaints', { method: 'POST', body: JSON.stringify(payload) }),
   getComplaintById: (id) => fetchJSON('/complaints/' + encodeURIComponent(id)),
-  getAllComplaints: () => fetchJSON('/complaints'), // <-- Add this line
+  getAllComplaints: () => fetchJSON('/complaints'),
   listComplaints: () => fetchJSON('/complaints'),
   updateComplaint: (id, data) => fetchJSON('/complaints/' + encodeURIComponent(id), { method: 'PATCH', body: JSON.stringify(data) }),
-  deleteComplaint: (id) => fetchJSON('/complaints/' + encodeURIComponent(id), { method: 'DELETE' })
+  deleteComplaint: (id) => fetchJSON('/complaints/' + encodeURIComponent(id), { method: 'DELETE' }),
+  checkActiveComplaint: (maxNumber) => fetchJSON(`/complaints/check_active?maxNumber=${maxNumber}`)
 };
