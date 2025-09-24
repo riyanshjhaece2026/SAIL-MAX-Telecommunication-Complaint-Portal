@@ -13,7 +13,7 @@ export function loadAdminLogin() {
       <input type="text" id="username" name="username" required />
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required />
-      <button type="submit" class="submit-btn">Login</button>
+      <button type="submit" class="submit-btn">Login &#128273;</button>
     </form>
     <div id="loginError" class="error" style="margin-top:15px;"></div>
   `;
