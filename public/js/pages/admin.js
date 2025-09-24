@@ -142,6 +142,19 @@ export async function loadAdminPanel() {
       tbody.innerHTML = list.map(tableRow).join('');
     }
     attachRowHandlers();
+    highlightNewComplaint();
+  }
+
+  function highlightNewComplaint() {
+    const newComplaintId = sessionStorage.getItem('newComplaintId');
+    if (newComplaintId) {
+      const row = document.querySelector(`tr[data-id="${newComplaintId}"]`);
+      if (row) {
+        row.classList.add('new-complaint-highlight');
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      sessionStorage.removeItem('newComplaintId');
+    }
   }
 
   function attachRowHandlers() {
