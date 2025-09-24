@@ -11,8 +11,8 @@ export function loadCheckStatus() {
       <input type="text" id="complaintId" name="complaintId" placeholder="Enter Complaint ID" />
       <label for="maxNumber"># Max Number:</label>
       <input type="text" id="maxNumber" name="maxNumber" placeholder="Enter Max Number" />
-      <label for="contactNumber">Mobile Number:</label>
-      <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter Mobile Number" />
+      <label for="contactNumber">Contact Number:</label>
+      <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter Contact Number" />
       <button type="submit" class="submit-btn">&#128269; Check Status</button>
       <p style="font-size:12px;color:#888;margin-top:4px;">(Enter any one field to check status)</p>
     </form>
