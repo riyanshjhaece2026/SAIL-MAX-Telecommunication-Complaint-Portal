@@ -28,7 +28,7 @@ const ComplaintSchema = new mongoose.Schema({
   issueType: { type: String, required: true },
   location: { type: String, required: true },
   contactNumber: { type: String, required: true },
-  status: { type: String, default: 'Registered' },
+  status: { type: String, default: 'In progress' },
   progressText: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
