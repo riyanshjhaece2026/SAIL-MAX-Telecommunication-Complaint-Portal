@@ -259,11 +259,10 @@ button.submit-btn:hover {
 /* Tables */
 .table-wrapper {
   width: 100%;
-  overflow-x: auto;
 }
 
 .admin-table {
-  width: 110%;
+  width: 100%;
   border-collapse: collapse;
   margin-top: 18px;
   font-size: 17px;
@@ -274,17 +273,21 @@ button.submit-btn:hover {
 
 .admin-table th, .admin-table td {
   border: 1.5px solid #e3f0ff;
-  padding: 20px;
+  padding: 15px;
   vertical-align: top;
   word-break: break-word;
 }
 
 .admin-table th {
-  background: linear-gradient(90deg, #0077cc 0%, #005fa3 100%);
+  background: #0077cc;
   color: white;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   letter-spacing: 0.5px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  border-bottom: 3px solid #005fa3;
+  white-space: nowrap;
 }
 
 .admin-table td {
