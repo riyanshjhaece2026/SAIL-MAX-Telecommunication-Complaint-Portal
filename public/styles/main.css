@@ -312,32 +312,15 @@ button.submit-btn:hover {
   flex-wrap: wrap;
 }
 
-.delete-btn {
-  background: linear-gradient(90deg, #dc3545 0%, #b02a37 100%);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  box-shadow: 0 2px 8px #dc354522;
-}
-
-.delete-btn:hover {
-  background: linear-gradient(90deg, #b02a37 0%, #dc3545 100%);
-  filter: brightness(1.08);
-}
-
 .update-btn {
   background: linear-gradient(100deg, #28a745 0%, #1e7e34 100%);
   color: white;
   border: none;
-  padding: 8px 20px;
+  padding: 12px 20px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   box-shadow: 0 2px 8px #28a74522;
 }
 
